@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-6
+      h2 Registrar Nuevo Usuario
+      p.text-muted Al crear el usuario se enviara un correo de verificacion via SendGrid (en produccion) o Ethereal (en local).
+      form(action="/usuarios/create", method="post")
+        .mb-3
+          label.form-label(for="nombre") Nombre
+          input#nombre.form-control(type="text", name="nombre", value=usuario.nombre || '', required)
+          if errors && errors.nombre
+            small.text-danger= errors.nombre.message
+        .mb-3
+          label.form-label(for="email") Email
+          input#email.form-control(type="email", name="email", value=usuario.email || '', required)
+          if errors && errors.email
+            small.text-danger= errors.email.message
+        .mb-3
+          label.form-label(for="password") Password
+          input#password.form-control(type="password", name="password", required)
+          if errors && errors.password
+            small.text-danger= errors.password.message
+        .mb-3
+          label.form-label(for="confirm_password") Confirmar Password
+          input#confirm_password.form-control(type="password", name="confirm_password", required)
+          if errors && errors.confirm_password
+            small.text-danger= errors.confirm_password.message
+        button.btn.btn-primary(type="submit") Crear Usuario y Enviar Verificacion

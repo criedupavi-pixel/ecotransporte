@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-5
+      .card.shadow-sm
+        .card-body
+          h3.card-title.mb-3 Iniciar Sesion
+          if info && info.message
+            .alert.alert-danger= info.message
+          form(action="/login", method="post")
+            .mb-3
+              label.form-label(for="email") Email
+              input#email.form-control(type="email", name="email", required)
+            .mb-3
+              label.form-label(for="password") Password
+              input#password.form-control(type="password", name="password", required)
+            button.btn.btn-primary.w-100.mb-2(type="submit") Ingresar
+          hr
+          a.btn.btn-outline-danger.w-100.mb-2(href="/auth/google") Ingresar con Google (OAuth)
+          .d-flex.justify-content-between.mt-3
+            a(href="/usuarios/create") Crear cuenta
+            a(href="/forgotPassword") Olvide mi password

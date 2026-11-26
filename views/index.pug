@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .row.mb-3
+    .col
+      h1 EcoTransporte
+      p.text-muted
+        | Ambiente activo: 
+        strong= env
+        |  | Base de datos: 
+        strong= env === 'production' ? 'MongoDB Atlas' : 'MongoDB Local'
+        |  | Mailer: 
+        strong= env === 'production' ? 'SendGrid' : 'Ethereal'
+  .row
+    .col
+      #main_map(style="height: 450px; width: 100%; border-radius: 8px;")
+
+block scripts
+  script.
+    var vehiculosData = !{JSON.stringify(vehiculos || [])};
+  script(src="/javascripts/map.js")

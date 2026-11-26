@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-3
+    h2 Listado de Vehiculos
+    a.btn.btn-success(href="/vehiculos/create") Nuevo Vehiculo
+  table.table.table-bordered
+    thead
+      tr
+        th Code
+        th Color
+        th Modelo
+        th Ubicacion (Lat, Lng)
+        th Acciones
+    tbody
+      each vehiculo in vehiculos
+        tr
+          td= vehiculo.code
+          td= vehiculo.color
+          td= vehiculo.modelo
+          td= vehiculo.ubicacion ? vehiculo.ubicacion.join(', ') : ''
+          td
+            a.btn.btn-sm.btn-warning.me-2(href="/vehiculos/" + vehiculo._id + "/update") Editar
+            form.d-inline(action="/vehiculos/" + vehiculo._id + "/delete", method="post")
+              input(type="hidden", name="id", value=vehiculo._id)
+              button.btn.btn-sm.btn-danger(type="submit") Eliminar
